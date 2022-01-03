@@ -1,0 +1,24 @@
+- You can open the debugger in BGB with ESC or Right Click > Other > Debugger
+
+- In the top-right is the register viewer.
+    - It displays both CPU registers and hardware registers. Right now we only care about the former.
+
+- Registers are the "workspace" of the CPU.
+    - Values are put into the registers so the CPU can easily work with them.
+    - The space is incredibly small, only 10 bytes in the Gameboy.
+    - For the most part, operations are taken from data, performed in the registers, and then put back into data.
+        - Rarely, operations are performed directly on the data.
+
+- There are two main kinds of registers: General-purpose and special-purpose.
+    - General-purpose registers (GPRs) can store arbitrary data.
+        - Some GPRs are also special, but they just need to be able to store arbitrary data.
+    - Special-purpose registers are more complicated and will be explained later.
+
+- The CPU has 7 8-bit GPRs: a, b, c, d, e, h, and l.
+    - They each store 8 bits, a number from 0 to 255 (or $0 to $FF)
+    - GPR a is called the accumulator, and it is special.
+
+- The GPRs are "paired up" into bc, de, and hl.
+    - These function as 16-bit registers.
+    - These are literally the combination of the values in b and c, d and e, etc.
+    - Modifying these changes their parts, and changing the parts modifies the combination.

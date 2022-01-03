@@ -1,0 +1,9 @@
+Summary notes:
+- Base-10 numbers are expressed without a prefix.
+- The following prefixes are used for other bases:
+    - Base-2: % (ex. %1010)
+    - Base-8: & (ex. &765)
+    - Base 16: $ (ex. $FE)
+- When individual bits matter, use binary or hex.
+    - When you just want a number, use decimal.
+- Underscores can be put between digits for spacing (1_000_000)
