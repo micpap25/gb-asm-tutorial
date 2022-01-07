@@ -1,0 +1,18 @@
+- You can use BGB's VRAM viewer to understand the tiles presented.
+    - It is in the Debugger's "Window" tab or the right-click menu's "Other" section.
+
+- Tiles are useful because they can be reused, saving on memory.
+    - Manipulating them is much easier than manipulating individual pixels.
+    - On a Gameboy, tiles are always 8x8 pixels.
+        - If tiles are grouped to make larger objects, we call those meta-tiles.
+
+- BPP stands for bits per pixel. We can use this figure to understand coloring on the Gameboy.
+    - A palette on the Gameboy is always 4 colors large.
+    - That means we can express the color of any pixel in 2 bits; thus, the Gameboy has 2bpp.
+        - Other consoles might have 2bpp, 4bpp, 8bpp, etc. depending on the graphics mode.
+    
+- Each row of 8 pixels is stores in 2 bytes, which contains the data for those 8 pixels.
+    - You cannot split up these 2 bytes.
+    - For each pixel, the LSB (least significant, smaller bit) is stored in the 1st byte
+        - The MSB (most significant, greater bit) is stored in the 2nd byte.
+    - Since they are collections of bits, these bytes are often called bitplanes.

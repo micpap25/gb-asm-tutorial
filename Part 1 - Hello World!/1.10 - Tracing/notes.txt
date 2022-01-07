@@ -1,0 +1,29 @@
+- Let's look more closely at the BGB debugger.
+    - The top left shows the code line by line.
+    - The bottom left views the data in a more condensed form.
+    - The top right shows the registers.
+    - The bottom right shows the stack.
+
+- To set BGB to RGBDS's syntax, set it in the "Debug" settings. Also check "Local symbols".
+
+- To actually get our labels into the rom, we need to create a sym file through rgblink.
+    - rgblink -n hello-world.sym hello-world.o
+        - -n specifies that we want a sym file.
+    - Then you can reload the sym file in the File menu.
+    - You can toggle symbols on and off with Tab.
+
+- The debugger always focuses on the line about to be executed; it is highlighted in blue.
+    - The line you have selected is highlighted in gray.
+    The first blue line will be $0100, because that's where the boot ROM gives control to our game when it's done.
+
+- Let's step through each instruction in the program.
+    - All the following commands are in the Run menu.
+    - You can restart the program with Reset or numpad *. This automatically pauses the program.
+    - You can unpause the program with Run or F9.
+    - You can go step-by-step with Trace (Step Into) or Step Over. They are the same right now because we have no call instructions.
+
+- However, we cannot step through effectively because of the WaitVBlank loop that comes first.
+    - By double clicking a line, we can highlight it red to set a breakpoint. 
+    - Then, when the program reaches that line in the code, it will automatically pause.
+
+- We can use Ctrl + G to "Goto" a point it the code. Let's go to 9000 (Hex value, no dollar sign though!) to see the tiles getting copied.

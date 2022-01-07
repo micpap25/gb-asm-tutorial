@@ -1,12 +1,19 @@
 - RGBASM is an assembler. It reads the source code it is given and produces object files.
     - These object files generally have "holes" because they do not contain all the information for a full ROM.
     - The .o extension indicates an object file.
+    - rgbasm -L -o hello-world.o hello-world.asm
+        - -L reduces optimization to better control output.
+        - -o sepcifies the output file.
 
 - RGBLINK is a linker. It takes object files and links them together into a ROM.
+    - rgblink -o hello-world.gb hello-world.o
+        - -o still specifies the output file.   
 
 - RGBFIX fixes the header of our ROM so it will run properly on a Gameboy.
     - It injects the Nintendo logo for the boot ROM (program which runs on startup).
         - This boot ROM is an anti-piracy measure that confirms the game is valid.
     - It also fixes our ROM to pass both the header checksum and full-ROM checksum.
         - The header checksum is commonly used, the full-ROM one is not, but no reason not to pass both.
-
+    - rgbfix -v -p 0xFF hello-world.gb
+        - -v calls a suite of other flags to make our ROM valid.
+        - -p pads the rom with what follows it (0xFF) so it is valid.

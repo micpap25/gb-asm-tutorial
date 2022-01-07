@@ -1,0 +1,6 @@
+- Each tile in our Tiles tab has an ID, or Tile Number. It is in hex.
+    - There are 256 IDs, but there are 384 (256*3/2) tiles available.
+    - Tiles are grouped into 3 128-tile groups, and the Gameboy uses the same set of IDs for the first 128 and last 128.
+        - There is a mechanism for determining which will be used, but don't worry about it or the first 128 tiles now.
+
+- We construct our "Hello World" by strategically reusing the tiles we have built.
