@@ -1,0 +1,36 @@
+- Sometimes, we ned to perform the same action multiple times.
+    - We can do do this using a jump instruction.
+    - The CPU normally uses the Program Counter (PC) to go through each instruction.
+        - The PC starts at the first instruction, and increments to the next instruction (a small number of bytes) constantly, so the program goes line-by-line.
+        - A jump command can write to the PC, changing what we are executing.
+
+- There are four jump commands:
+    - jp - Jump to a location.
+    - jr - Jump to a nearby location
+    - call - call a subroutine
+    - ret - return from a subroutine.
+    - We will mostly just focus on jp.
+        - Example: jp EntryPoint
+
+- Jumps are interesting when they are conditional.
+    - We can create a loop like this:
+
+        - CopyTiles:
+        - ld a, [de]
+        - ld [hli], a
+        - inc de
+        - dec bc
+        - ld a, b
+        - or a, c
+        - jp nz, CopyTiles
+
+    - What does this code do? We copy bc values from de into hl.
+        - We take the value from de, put it in hl, increment de and hl.
+        - Then we decrement bc. Sometimes dec updates flags, but dec bc doesn't, so we need to update flags ourself.
+        - or is a bitwise or. ld a, b or a, c lets us check if bc as a whole is 0.
+        - Then we use a special two-operator jp instruction, where the first operator is one of four conditions:
+            - z, Z is set, last operation resulted in zero
+            - nz, Z is not set, last operation didn't result in 0
+            - c, C is set, last operation overflowed.
+            - nc, C is not set, last operation did not overflow.
+        - So, as long as bc isn't 0, we will continue looping. 

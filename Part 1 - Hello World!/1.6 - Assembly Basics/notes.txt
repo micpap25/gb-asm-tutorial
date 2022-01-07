@@ -1,0 +1,27 @@
+- Comments are done using a semicolon (;)
+    - Everything after a semicolon on the same line is ignored.
+    - Comments are especially important in ASM because code is not so semantic.
+
+- In Assembly, each line does one thing. It is very line-based.
+    - The CPU goes executes each line, like following a recipe which will eventually result in something.
+
+- A line can either be a directive or an instruction.
+    - A directive is something our code tells RGBASM to do when making the object file.
+        - Basically, something the compiler does.
+    - An instruction is something that goes directly from our code to the ROM.
+        - Basically, something that our game will do.
+        - Technically, in RGBDS, all instructions are directives which tell the compiler to write themselves to the ROM.
+            - This is because there are slight differences between source code instructions and ROM instructions which need to be encoded for.
+
+- Instructions have two parts:
+    - The mnemonic is the name of the instruction in the code.
+    - The operands are the things the instruction should act on.
+    - One instruction line, then, is formed from one mnemonic followed by some number of operands.
+    - If there are two operands, we might refer to them as the left-hand side (LHS) and the right-hand side (RHS)
+
+- One of the most fundamental operands is ld, or LoaD.
+    - Load takes two operands and copies data from its RHS to its LHS.
+    - In most cases, you will have a register in the LHS.
+    - When copying a constant value from the RHS, the ROM stores the constant value immediately after the ld instruction so it can be fetched.
+    - You can also have another register in the RHS for copying.
+    - The CPU may prevent you from doing certain operand combinations for ld and other instructions. We will get back to this.

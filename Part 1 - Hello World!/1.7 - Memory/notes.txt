@@ -1,0 +1,58 @@
+- We see this line: ld a, [de]. What do the brackets mean?
+    - To answer this, we must understand memory.
+
+- Memory is how any computer stores information.
+    - Memory is a long array of "cells" of information.
+    - Numbers are stored in memory by the presence/absence of something, like current or magnetism.
+    - This causes each bit to be 0 or 1.
+    - On the Game Boy and most systems, each cell is 1 byte, or 8 bits.
+    - Each byte has a unique address; the first cell is address 0, the second is address 1, etc.
+
+- There are many kinds of memory. The Gameboy has a few memory chips.
+    - The two main categories are ROM; Read-only Memory, and RAM; Random-access memory.
+        - There are a few others, like Flash and EEPROM, but the only other every used for the Gameboy is Flash, and only rarely.
+    - The main difference is ROM cannot be written to, and RAM can.
+        - This is enforced by ROM often being directly hard-wired into the console/game.
+        - ROM does not just mean persistent memory, it is a certain kind of chip.
+    - To determine which addresses belong to which chip, a chip selector is used to translate data.
+        - Say chip A has 2000 bytes and chip B has 1000 bytes.
+        - The convention might be that chip A has addresses 0-1999 and chip B has addresses 2000-2999
+        - Then when the CPU asks for address 2014, the chip selector will ask chip B for its address 14.
+    - We describe the CPU's addresses as logical because they do not directly correspond to the actual locations.
+        - In turn, the chips' addresses are physical.
+
+- The memory map of the Gameboy looks as follows:
+    - In total, 2^16 or 65536 logical addresses from $0000 to $FFFF
+    - Broken into these parts:
+        - 0000 to 7FFF is game ROM from the cartridge.
+        - 8000 to 9FFF is VRAM where graphics are stored.
+        - A000 to BFFF is SRAM for saving data.
+        - C000 to DFFF is WRAM for generally working on data.
+        - FE00 to FE9F is OAM, where "objects" are stored.
+        - FF00 to FF7F is I/O where the console is controlled.
+        - FF80 to FFFE is HRAM which is quick-access RAM.
+        - FFFF is a single extra I/O byte.
+    - Thus, there are 7776 extra bytes that you shouldn't access. 
+
+- Labels are "symbols" which represent memory locations
+    - They look like this
+        - EntryPoint:
+    - They attach their name to a byte of memory by coming right before a certain line.
+    - They allow you to, in most cases, substitute a memory location for a string, which is much more clean.
+    - There are also constants, defined as such:
+        - DEF constant EQU $F23F
+    - These both allow you to substitute memory addresses for strings, there are differences but those are not important right now.
+
+- Brackets are Assembly's version of dereferencing.
+    - ld a, [de] lets us copy the (8-bit) value pointed to by the (16-bit) address de into a
+    - Don't get confused, ld a, b works because these are both registers with values.
+        - de functions as an address here, not a value. It points to a value, though.
+
+- Increments/decrements also exist.
+    - Consider the following:
+        - ld [hli], a
+        - ld [hl+], a
+        - ld [hld], a
+        - ld [hl-], a
+    - The first two will increment hl after finishing the load.
+    - The latter two will decrement instead.

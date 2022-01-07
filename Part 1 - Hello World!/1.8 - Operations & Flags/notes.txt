@@ -1,0 +1,22 @@
+- The Gameboy CPU provides many operations for arithmetic.
+    - The simplest are these:
+        - inc
+        - dec
+    - These allow you to increment and decrement their single operand.
+    - There are also these:
+        - add
+        - sub
+    - These add or subtract from the first operand by the second (the second can be constant or a register/value)
+    - There is also cp, which subtracts but does not update the first operand. Why do this?
+    - To do more complicated arithmetic, we must look at flags.
+
+- The special register f stores 4 flags which are updated when an operation occurs.
+    - Z is a zero flag, which checks if the result is 0.
+    - C is a carry flag, which checks if there is an overflow or underflow.
+    - The other two are N (add/sub) and H (half-carry) which aren't important right now.
+    - Overflow/underflow occurs when a register goes higher than 255 / less that 0, so it wraps around.
+
+- Some uses of flags with cp:
+    - Let's say we call cp a, 144
+        - If a = 144, then Z is set, otherwise Z is not set.
+        - If a < 144, C is set, otherwise C is not set.
